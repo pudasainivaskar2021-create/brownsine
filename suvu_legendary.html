@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>For Suvu 🌹 — From Gawar</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  --red:#c0304a;--dark-red:#8b2035;--pink:#f5d0d8;--deep-pink:#e8a0b0;
+  --dark:#050110;--card:#0d0320;--border:#1f0840;
+  --purple:#2a0845;--light-purple:#6a2a9a;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:#f0e0f5;font-family:'Lato',sans-serif;overflow-x:hidden;cursor:default;}
+
+/* ========= GALAXY CANVAS ========= */
+#galaxy{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+
+/* ========= FLOATING PETALS ========= */
+.petal{position:fixed;pointer-events:none;animation:petalfall linear infinite;z-index:1;font-size:14px;}
+@keyframes petalfall{0%{transform:translateY(-30px) rotate(0deg) scale(1);opacity:.9;}100%{transform:translateY(110vh) rotate(720deg) scale(.4);opacity:0;}}
+
+/* ========= NAV ========= */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:12px 16px;background:rgba(5,1,16,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Dancing Script',cursive;font-size:22px;color:var(--pink);}
+.nav-links{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;}
+nav a{color:#7a4488;font-size:9px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;padding:4px 8px;border:1px solid transparent;border-radius:20px;transition:all .3s;}
+nav a:hover{color:var(--pink);border-color:var(--border);}
+
+/* ========= SECTIONS BASE ========= */
+section{position:relative;z-index:2;padding:80px 20px;}
+.sec-tag{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--dark-red);margin-bottom:12px;display:block;}
+.sec-h{font-family:'Playfair Display',serif;font-size:clamp(28px,7vw,56px);font-weight:400;color:var(--pink);line-height:1.15;margin-bottom:20px;}
+.sec-h em{color:var(--red);font-style:italic;}
+.sec-p{font-size:clamp(14px,3.5vw,17px);color:#b080c0;line-height:2;font-style:italic;}
+.sec-p .hl{color:#f0d0f5;font-style:normal;font-weight:700;}
+.center{text-align:center;}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .9s ease,transform .9s ease;}
+.reveal.vis{opacity:1;transform:translateY(0);}
+
+/* ========= HERO ========= */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 80px;}
+.hero-pre{font-size:9px;letter-spacing:7px;text-transform:uppercase;color:#5a2068;animation:fadeUp 1s ease .2s both;}
+.hero-name{font-family:'Dancing Script',cursive;font-size:clamp(90px,22vw,200px);color:var(--pink);line-height:.9;animation:fadeUp 1.2s ease .5s both;text-shadow:0 0 60px rgba(192,48,74,.3);}
+.hero-sub{font-size:clamp(13px,3.5vw,18px);font-style:italic;color:#9050a8;margin-top:16px;animation:fadeUp 1s ease .9s both;}
+.hero-counter{display:flex;gap:24px;justify-content:center;margin-top:40px;animation:fadeUp 1s ease 1.2s both;}
+.hc-box{background:rgba(42,8,69,.5);border:1px solid var(--border);border-radius:12px;padding:16px 24px;text-align:center;}
+.hc-num{font-family:'Playfair Display',serif;font-size:clamp(28px,8vw,48px);color:var(--red);font-weight:700;display:block;}
+.hc-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#5a2068;}
+.hero-scroll{position:absolute;bottom:28px;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#3a1050;animation:bounce 2s ease infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(7px);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+/* ========= LIVE TYPING LETTER ========= */
+#typing-sec{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,#0d0320 0%,var(--dark) 70%);}
+.typing-paper{max-width:600px;width:100%;background:rgba(13,3,32,.95);border:1px solid var(--border);border-radius:8px;padding:clamp(28px,6vw,56px);position:relative;}
+.typing-paper::before{content:'';position:absolute;inset:10px;border:1px solid rgba(42,8,69,.4);border-radius:4px;pointer-events:none;}
+.tp-date{font-size:10px;letter-spacing:3px;color:#3a1050;text-transform:uppercase;margin-bottom:24px;}
+.tp-greeting{font-family:'Dancing Script',cursive;font-size:clamp(24px,6vw,36px);color:var(--pink);margin-bottom:20px;}
+#typed-text{font-size:clamp(14px,3.5vw,16px);color:#b080c0;line-height:2.2;font-style:italic;min-height:120px;}
+#typed-text .hl{color:#f0d0f5;font-style:normal;}
+.cursor{display:inline-block;width:2px;height:1.1em;background:var(--red);vertical-align:text-bottom;animation:blink .8s ease infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.tp-sign{font-family:'Dancing Script',cursive;font-size:clamp(22px,5vw,32px);color:var(--red);margin-top:32px;}
+
+/* ========= PHOTO GALLERY ========= */
+#gallery{background:#030010;padding:80px 16px;}
+.gallery-intro{text-align:center;margin-bottom:48px;}
+.photo-masonry{columns:2;column-gap:10px;max-width:900px;margin:0 auto;}
+.photo-item{break-inside:avoid;margin-bottom:10px;position:relative;border-radius:12px;overflow:hidden;cursor:pointer;}
+.photo-item img{width:100%;display:block;border-radius:12px;filter:brightness(.8) saturate(1.1);transition:transform .5s,filter .5s;}
+.photo-item:hover img{transform:scale(1.04);filter:brightness(.95) saturate(1.3);}
+.photo-placeholder{width:100%;background:linear-gradient(135deg,#0d0320,#1a0840,#0d0320);border:1px dashed #2a0845;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all .4s;padding:32px 16px;}
+.photo-placeholder:hover{background:linear-gradient(135deg,#1a0840,#2a1060,#1a0840);border-color:#5a2a80;}
+.photo-placeholder span{font-size:clamp(24px,6vw,36px);}
+.photo-placeholder p{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#3a1050;text-align:center;}
+.photo-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(5,1,16,.95),transparent);padding:20px 16px 12px;font-size:clamp(11px,3vw,13px);font-style:italic;color:var(--deep-pink);opacity:0;transition:opacity .4s;}
+.photo-item:hover .photo-caption{opacity:1;}
+/* lightbox */
+#lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:500;display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px;}
+#lightbox.open{display:flex;}
+#lb-img{max-width:90vw;max-height:80vh;border-radius:12px;object-fit:contain;}
+#lb-close{position:absolute;top:20px;right:24px;font-size:28px;color:#fff;cursor:pointer;background:none;border:none;}
+#lb-caption{font-size:14px;font-style:italic;color:var(--deep-pink);margin-top:16px;text-align:center;}
+
+/* ========= TRAITS SECTION ========= */
+#traits{background:radial-gradient(ellipse at 30% 50%,#0d0320,var(--dark));}
+.traits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;max-width:800px;margin:40px auto;}
+.trait-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 20px;text-align:center;transition:transform .35s,border-color .35s;cursor:default;}
+.trait-card:hover{transform:translateY(-6px) scale(1.02);border-color:#5a2a80;}
+.trait-icon{font-size:clamp(28px,7vw,40px);margin-bottom:12px;display:block;}
+.trait-name{font-family:'Playfair Display',serif;font-size:clamp(16px,4vw,20px);color:var(--pink);margin-bottom:8px;}
+.trait-desc{font-size:clamp(12px,3vw,13px);color:#7a4080;font-style:italic;line-height:1.7;}
+
+/* ========= MEMORY TIMELINE ========= */
+#memories{background:#030010;padding:80px 20px;}
+.mem-timeline{max-width:680px;margin:0 auto;position:relative;}
+.mem-timeline::before{content:'';position:absolute;left:20px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--dark-red),transparent);}
+.mem-item{padding-left:56px;margin-bottom:52px;position:relative;}
+.mem-dot{position:absolute;left:12px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--red);border:3px solid var(--dark);box-shadow:0 0 12px rgba(192,48,74,.5);}
+.mem-num{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--dark-red);margin-bottom:8px;}
+.mem-title{font-family:'Playfair Display',serif;font-size:clamp(18px,5vw,26px);color:var(--pink);margin-bottom:10px;}
+.mem-body{font-size:clamp(13px,3.5vw,15px);color:#9060a0;font-style:italic;line-height:1.9;}
+.mem-body .hl{color:#f0d0f5;font-style:normal;}
+
+/* ========= GALAXY PARALLAX SECTION ========= */
+#galaxy-sec{min-height:70vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 24px;background:transparent;}
+.galaxy-quote{max-width:600px;}
+.gq-big{font-family:'Playfair Display',serif;font-size:clamp(32px,8vw,64px);font-weight:400;color:var(--pink);line-height:1.2;font-style:italic;}
+.gq-small{font-size:clamp(13px,3.5vw,16px);color:#7a4080;margin-top:20px;font-style:italic;line-height:1.9;}
+
+/* ========= PETAL GAME ========= */
+#game1{background:radial-gradient(ellipse at 70% 50%,#0d0320,var(--dark));text-align:center;}
+.flower-wrap{display:flex;flex-direction:column;align-items:center;margin:32px auto;max-width:480px;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px 28px;}
+.big-flower{font-size:clamp(64px,16vw,96px);cursor:pointer;transition:transform .25s;display:inline-block;user-select:none;-webkit-user-select:none;}
+.big-flower:active{transform:scale(.85) rotate(-15deg);}
+.petal-msg-box{background:rgba(42,8,69,.4);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:20px;min-height:72px;display:flex;align-items:center;justify-content:center;}
+.petal-msg-txt{font-family:'Playfair Display',serif;font-size:clamp(15px,4vw,19px);font-style:italic;color:var(--pink);line-height:1.6;}
+.petal-ct{font-size:10px;letter-spacing:3px;color:#5a2068;margin-top:12px;}
+.game-btn{margin-top:20px;padding:10px 28px;background:transparent;border:1px solid var(--dark-red);color:var(--pink);font-size:10px;letter-spacing:3px;text-transform:uppercase;border-radius:40px;cursor:pointer;font-family:'Lato',sans-serif;transition:all .3s;}
+.game-btn:hover,.game-btn:active{background:var(--dark-red);}
+
+/* ========= WHY I LOVE YOU (scroll cards) ========= */
+#loves{background:#030010;overflow:hidden;}
+.loves-scroll{display:flex;gap:16px;overflow-x:auto;padding:16px 20px 24px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.loves-scroll::-webkit-scrollbar{display:none;}
+.love-card{min-width:220px;max-width:220px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 20px;flex-shrink:0;scroll-snap-align:start;transition:border-color .3s;}
+.love-card:hover{border-color:#5a2a80;}
+.lc-icon{font-size:32px;margin-bottom:12px;}
+.lc-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--pink);margin-bottom:8px;}
+.lc-desc{font-size:12px;color:#6a3070;font-style:italic;line-height:1.8;}
+
+/* ========= QUIZ ========= */
+#quiz{background:radial-gradient(ellipse at center,#0d0320,var(--dark));text-align:center;}
+.quiz-box{max-width:520px;margin:40px auto;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 28px;}
+.q-num{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--dark-red);margin-bottom:12px;}
+.q-text{font-family:'Playfair Display',serif;font-size:clamp(18px,5vw,24px);color:var(--pink);margin-bottom:28px;line-height:1.4;}
+.q-options{display:flex;flex-direction:column;gap:10px;}
+.q-opt{padding:14px 20px;background:transparent;border:1px solid var(--border);border-radius:10px;color:#b080c0;font-size:clamp(13px,3.5vw,15px);cursor:pointer;text-align:left;font-family:'Lato',sans-serif;transition:all .3s;}
+.q-opt:hover,.q-opt:active{border-color:var(--red);color:var(--pink);}
+.q-opt.correct{border-color:#3a8a3a;color:#90d090;background:rgba(30,80,30,.2);}
+.q-opt.wrong{border-color:#8a2020;color:#d07070;background:rgba(80,20,20,.2);}
+.q-feedback{font-size:clamp(13px,3.5vw,15px);font-style:italic;color:var(--deep-pink);margin-top:16px;min-height:28px;line-height:1.6;}
+.q-score{font-family:'Playfair Display',serif;font-size:clamp(20px,5vw,28px);color:var(--pink);margin-top:16px;}
+.q-score-msg{font-size:14px;font-style:italic;color:#9060a0;margin-top:8px;line-height:1.7;}
+#q-next{margin-top:20px;}
+
+/* ========= MEMORY MATCH GAME ========= */
+#memorygame{background:#030010;text-align:center;}
+.mg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:440px;margin:32px auto;}
+.mc{height:clamp(72px,18vw,90px);cursor:pointer;perspective:800px;}
+.mc-inner{width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d;position:relative;}
+.mc.flip .mc-inner,.mc.done .mc-inner{transform:rotateY(180deg);}
+.mc-f,.mc-b{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;font-size:clamp(20px,5vw,28px);}
+.mc-f{background:var(--card);border:1px solid var(--border);}
+.mc-b{background:#120828;border:1px solid var(--dark-red);transform:rotateY(180deg);}
+.mc.done .mc-b{border-color:#5a8a2a;background:#0a1808;}
+#mg-msg{font-family:'Playfair Display',serif;font-size:clamp(14px,4vw,18px);font-style:italic;color:var(--pink);min-height:40px;margin-top:12px;padding:0 16px;}
+#mg-win{font-family:'Playfair Display',serif;font-size:clamp(16px,4.5vw,22px);font-style:italic;color:var(--pink);margin-top:20px;line-height:1.6;padding:0 12px;}
+
+/* ========= THINGS SHE DOES ========= */
+#quirks{background:radial-gradient(ellipse at 60% 40%,#0d0320,var(--dark));}
+.quirk-list{max-width:600px;margin:40px auto;}
+.quirk-item{display:flex;align-items:flex-start;gap:16px;margin-bottom:32px;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:14px;transition:border-color .3s;}
+.quirk-item:hover{border-color:#5a2a80;}
+.quirk-emoji{font-size:clamp(24px,6vw,32px);flex-shrink:0;margin-top:2px;}
+.quirk-text{font-size:clamp(13px,3.5vw,15px);color:#9060a0;font-style:italic;line-height:1.9;}
+.quirk-text .hl{color:var(--pink);font-style:normal;}
+.quirk-title{font-family:'Playfair Display',serif;font-size:clamp(16px,4.5vw,20px);color:var(--pink);margin-bottom:6px;}
+
+/* ========= HEARTBEAT SECTION ========= */
+#heartbeat-sec{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#030010;padding:60px 24px;}
+.hb-big{font-size:clamp(72px,20vw,140px);animation:hb 1.4s ease-in-out infinite;color:var(--red);line-height:1;cursor:pointer;}
+@keyframes hb{0%,100%{transform:scale(1);}14%{transform:scale(1.25);}28%{transform:scale(1);}42%{transform:scale(1.18);}56%{transform:scale(1);}}
+.hb-msg{font-family:'Playfair Display',serif;font-size:clamp(18px,5vw,28px);font-style:italic;color:var(--pink);max-width:480px;margin-top:28px;line-height:1.6;}
+.hb-sub{font-size:clamp(12px,3.5vw,15px);color:#6a3070;margin-top:12px;font-style:italic;}
+#hb-count{font-family:'Playfair Display',serif;font-size:clamp(14px,4vw,20px);color:var(--dark-red);margin-top:20px;}
+
+/* ========= PROMISE SECTION ========= */
+#promises{background:radial-gradient(ellipse at 40% 60%,#0d0320,var(--dark));}
+.promise-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;max-width:800px;margin:40px auto;}
+.promise-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 22px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s;}
+.promise-card::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(192,48,74,.08),transparent);pointer-events:none;}
+.promise-card:hover{transform:translateY(-4px);border-color:var(--dark-red);}
+.promise-num{font-family:'Playfair Display',serif;font-size:56px;font-weight:700;color:rgba(192,48,74,.08);position:absolute;top:8px;right:16px;line-height:1;}
+.promise-title{font-family:'Playfair Display',serif;font-size:clamp(16px,4.5vw,20px);color:var(--pink);margin-bottom:10px;}
+.promise-body{font-size:clamp(12px,3vw,14px);color:#7a4080;font-style:italic;line-height:1.8;}
+
+/* ========= FINAL LOVE LETTER ========= */
+#letter{background:#030010;text-align:center;}
+.letter-wrap{max-width:640px;margin:40px auto;background:linear-gradient(150deg,#0d0320,#100428);border:1px solid var(--border);border-radius:6px;padding:clamp(32px,7vw,60px);text-align:left;position:relative;}
+.letter-wrap::before{content:'';position:absolute;inset:12px;border:1px solid rgba(42,8,69,.3);border-radius:2px;pointer-events:none;}
+.l-date{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#3a1050;margin-bottom:28px;}
+.l-greet{font-family:'Dancing Script',cursive;font-size:clamp(26px,7vw,40px);color:var(--pink);margin-bottom:20px;}
+.l-body{font-size:clamp(14px,3.5vw,16px);color:#a070b0;line-height:2.4;font-style:italic;}
+.l-body .hl{color:#f0d0f5;font-style:normal;font-weight:700;}
+.l-sign{font-family:'Dancing Script',cursive;font-size:clamp(26px,6vw,38px);color:var(--red);margin-top:36px;}
+
+/* ========= GRAND FINALE ========= */
+#finale{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px;background:radial-gradient(ellipse at 50% 50%,#150528,var(--dark));position:relative;overflow:hidden;}
+.finale-ghost{position:absolute;font-family:'Playfair Display',serif;font-size:clamp(80px,25vw,280px);color:rgba(192,48,74,.03);user-select:none;pointer-events:none;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;}
+.finale-months{font-family:'Playfair Display',serif;font-size:clamp(80px,22vw,180px);font-weight:700;color:transparent;-webkit-text-stroke:1px rgba(192,48,74,.25);line-height:1;margin-bottom:0;}
+.finale-m-label{font-size:10px;letter-spacing:8px;text-transform:uppercase;color:#3a1050;margin-bottom:48px;}
+.finale-big{font-family:'Playfair Display',serif;font-size:clamp(28px,7vw,52px);color:var(--pink);font-style:italic;line-height:1.4;max-width:580px;}
+.finale-from{font-family:'Dancing Script',cursive;font-size:clamp(20px,5vw,32px);color:#5a1a25;margin-top:40px;}
+
+/* confetti */
+.conf{position:fixed;pointer-events:none;z-index:999;animation:conffall linear forwards;}
+@keyframes conffall{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+</style>
+</head>
+<body>
+<canvas id="galaxy"></canvas>
+<div id="petal-container"></div>
+<div id="lightbox"><button id="lb-close" onclick="closeLB()">✕</button><img id="lb-img" src="" alt=""><p id="lb-caption"></p></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Suvu 🌹</div>
+  <div class="nav-links">
+    <a href="#hero">Home</a>
+    <a href="#gallery">Photos</a>
+    <a href="#memories">Us</a>
+    <a href="#game1">Game</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#letter">Letter</a>
+    <a href="#finale">Always</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-pre">A gift from your Gawar 🌹</div>
+  <div class="hero-name">Suvu</div>
+  <div class="hero-sub">the funniest, most caring, most beautiful person I have ever known</div>
+  <div class="hero-counter">
+    <div class="hc-box"><span class="hc-num" id="cnt-days">300</span><span class="hc-label">Days</span></div>
+    <div class="hc-box"><span class="hc-num">10</span><span class="hc-label">Months</span></div>
+    <div class="hc-box"><span class="hc-num">∞</span><span class="hc-label">More to go</span></div>
+  </div>
+  <div class="hero-scroll">↓ scroll, jaan ↓</div>
+</section>
+
+<!-- ===== TYPING LETTER ===== -->
+<section id="typing-sec">
+  <div class="typing-paper reveal">
+    <div class="tp-date">10 months of us — 2024</div>
+    <div class="tp-greeting">My Suvu,</div>
+    <div id="typed-text"><span class="cursor"></span></div>
+    <div class="tp-sign" id="tp-sign" style="opacity:0;transition:opacity 1s;">Forever yours, Gawar 🌹</div>
+  </div>
+</section>
+
+<!-- ===== PHOTO GALLERY ===== -->
+<section id="gallery">
+  <div class="gallery-intro reveal">
+    <span class="sec-tag">our moments</span>
+    <h2 class="sec-h">Us, captured 📸</h2>
+    <p style="font-size:14px;color:#5a2068;font-style:italic;">Tap a photo to open it — replace the 📸 placeholders with Suvu's real photos</p>
+  </div>
+  <div class="photo-masonry" id="photo-masonry"></div>
+</section>
+
+<!-- ===== TRAITS ===== -->
+<section id="traits">
+  <div class="center reveal">
+    <span class="sec-tag">the full package</span>
+    <h2 class="sec-h">Everything she is</h2>
+  </div>
+  <div class="traits-grid">
+    <div class="trait-card reveal"><span class="trait-icon">😂</span><div class="trait-name">Funny</div><div class="trait-desc">She can make me laugh out of nowhere. Her humour is just — effortlessly hers.</div></div>
+    <div class="trait-card reveal"><span class="trait-icon">🤗</span><div class="trait-name">Caring</div><div class="trait-desc">She loves people so deeply it shows in everything she does. So quietly, so fully.</div></div>
+    <div class="trait-card reveal"><span class="trait-icon">😴</span><div class="trait-name">Sleepy queen</div><div class="trait-desc">Baby can sleep ANYWHERE, ANYTIME. And somehow looks adorable doing it every time.</div></div>
+    <div class="trait-card reveal"><span class="trait-icon">🧠</span><div class="trait-name">Short memory</div><div class="trait-desc">She forgets things in 2 minutes. But she never forgets what matters — and that is us.</div></div>
+    <div class="trait-card reveal"><span class="trait-icon">📱</span><div class="trait-name">Her texts</div><div class="trait-desc">Those messages she sends drive me absolutely crazy. In the best possible way.</div></div>
+    <div class="trait-card reveal"><span class="trait-icon">💋</span><div class="trait-name">Those photos</div><div class="trait-desc">When she sends kissing photos my whole heart stops. She has no idea what she does to me.</div></div>
+  </div>
+</section>
+
+<!-- ===== MEMORIES TIMELINE ===== -->
+<section id="memories">
+  <div class="center reveal">
+    <span class="sec-tag">written in my heart</span>
+    <h2 class="sec-h">Our memories</h2>
+  </div>
+  <div class="mem-timeline">
+    <div class="mem-item reveal">
+      <div class="mem-dot"></div>
+      <div class="mem-num">Memory 01</div>
+      <div class="mem-title">The forehead kiss at college 💋</div>
+      <p class="mem-body">I kissed her on the forehead at college and the whole world went quiet. <span class="hl">That moment lives in me forever.</span> It was soft, it was ours, it was everything.</p>
+    </div>
+    <div class="mem-item reveal">
+      <div class="mem-dot"></div>
+      <div class="mem-num">Memory 02</div>
+      <div class="mem-title">The market hug 🛍️</div>
+      <p class="mem-body">We hugged at the market like no one was watching. <span class="hl">Her warmth in that moment</span> — I still feel it. I always will.</p>
+    </div>
+    <div class="mem-item reveal">
+      <div class="mem-dot"></div>
+      <div class="mem-num">Memory 03</div>
+      <div class="mem-title">When she sent that photo 📸</div>
+      <p class="mem-body">She sent me a kissing photo and I swear my heart did three flips. <span class="hl">She has no idea what she does to me</span> with a single photo.</p>
+    </div>
+    <div class="mem-item reveal">
+      <div class="mem-dot"></div>
+      <div class="mem-num">Memory 04</div>
+      <div class="mem-title">Her sleeping face 😴</div>
+      <p class="mem-body">This girl can fall asleep at any time, any place. And every single time — <span class="hl">she looks so peaceful, so beautiful</span>, I just want to watch over her forever.</p>
+    </div>
+    <div class="mem-item reveal">
+      <div class="mem-dot"></div>
+      <div class="mem-num">Memory 05</div>
+      <div class="mem-title">Her forgetting everything 🧠</div>
+      <p class="mem-body">She forgets what she said 2 minutes ago. But somehow — <span class="hl">she never forgets to make me feel loved.</span> And that is the only memory that counts.</p>
+    </div>
+    <div class="mem-item reveal">
+      <div class="mem-dot"></div>
+      <div class="mem-num">Memory 06</div>
+      <div class="mem-title">10 months together 🌹</div>
+      <p class="mem-body">Ten months of laughing, hugging, texting, fighting, making up. <span class="hl">Ten months of choosing each other.</span> And I would choose her ten thousand times more.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALAXY QUOTE ===== -->
+<section id="galaxy-sec">
+  <div class="galaxy-quote reveal">
+    <div class="gq-big">"You are not just my favourite person."</div>
+    <p class="gq-small">You are the home I chose with my whole heart.<br>You sit right next to my family in my world.<br>And that is the highest place I have.<br><br>— Gawar, always 🌹</p>
+  </div>
+</section>
+
+<!-- ===== PETAL GAME ===== -->
+<section id="game1">
+  <div class="center reveal">
+    <span class="sec-tag">a game for you</span>
+    <h2 class="sec-h">Pick a petal, Suvu 🌸</h2>
+    <p style="font-size:14px;color:#6a3070;font-style:italic;">Each petal has a secret message from Gawar — tap it</p>
+  </div>
+  <div class="flower-wrap reveal">
+    <div class="big-flower" id="flower" onclick="pickPetal()">🌸</div>
+    <div class="petal-msg-box"><p class="petal-msg-txt" id="petal-msg">Tap the flower above ↑</p></div>
+    <p class="petal-ct" id="petal-ct"></p>
+    <button class="game-btn" onclick="resetPetals()">🌸 New flower</button>
+  </div>
+</section>
+
+<!-- ===== WHY I LOVE YOU ===== -->
+<section id="loves">
+  <div class="center reveal">
+    <span class="sec-tag">reasons are endless</span>
+    <h2 class="sec-h">Why Gawar is obsessed with Suvu</h2>
+    <p style="font-size:13px;color:#5a2068;font-style:italic;margin-bottom:8px;">← Swipe →</p>
+  </div>
+  <div class="loves-scroll" id="loves-scroll"></div>
+</section>
+
+<!-- ===== QUIRKS ===== -->
+<section id="quirks">
+  <div class="center reveal">
+    <span class="sec-tag">the little things</span>
+    <h2 class="sec-h">Things she does<br><em>that wreck me</em></h2>
+  </div>
+  <div class="quirk-list">
+    <div class="quirk-item reveal"><div class="quirk-emoji">😴</div><div><div class="quirk-title">She sleeps a LOT</div><p class="quirk-text">This girl can close her eyes anywhere and just — go. And honestly? <span class="hl">She looks so peaceful</span> I could watch her sleep forever without getting bored.</p></div></div>
+    <div class="quirk-item reveal"><div class="quirk-emoji">🧠</div><div><div class="quirk-title">The 2-minute memory</div><p class="quirk-text">She will forget what she just said mid-sentence. But she <span class="hl">never forgets how to make me feel like I matter</span>. That memory is always perfect.</p></div></div>
+    <div class="quirk-item reveal"><div class="quirk-emoji">📱</div><div><div class="quirk-title">Her texts</div><p class="quirk-text">I don't know what she puts in her messages but every single text from her <span class="hl">makes my whole day shift</span>. One text. That's all it takes.</p></div></div>
+    <div class="quirk-item reveal"><div class="quirk-emoji">😂</div><div><div class="quirk-title">Her laugh</div><p class="quirk-text">It escapes before she can stop it. The real one. The loud one. <span class="hl">That laugh is my favourite sound in the entire world</span> and I will fight anyone who says otherwise.</p></div></div>
+    <div class="quirk-item reveal"><div class="quirk-emoji">💋</div><div><div class="quirk-title">Those photos she sends</div><p class="quirk-text">When she sends a kissing photo — Gawar's heart literally stops working for a second. <span class="hl">She is dangerous</span> and she knows it.</p></div></div>
+    <div class="quirk-item reveal"><div class="quirk-emoji">🤗</div><div><div class="quirk-title">How she hugs</div><p class="quirk-text">There is something about the way she hugs. That market hug? <span class="hl">I replay it in my head more than I should admit.</span></p></div></div>
+  </div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section id="quiz">
+  <div class="center reveal">
+    <span class="sec-tag">how well does she know us</span>
+    <h2 class="sec-h">The Gawar & Suvu Quiz 💌</h2>
+    <p style="font-size:14px;color:#6a3070;font-style:italic;">Answer honestly, baby 👀</p>
+  </div>
+  <div class="quiz-box reveal" id="quiz-box"></div>
+</section>
+
+<!-- ===== MEMORY MATCH ===== -->
+<section id="memorygame">
+  <div class="center reveal">
+    <span class="sec-tag">play with me</span>
+    <h2 class="sec-h">Love match 💘</h2>
+    <p style="font-size:14px;color:#6a3070;font-style:italic;">Match the pairs — each one reveals a message 💌</p>
+  </div>
+  <div class="mg-grid reveal" id="mg-grid"></div>
+  <p id="mg-msg"></p>
+  <p id="mg-win"></p>
+  <button class="game-btn" onclick="initMG()" style="margin-top:16px;">🔄 Play again</button>
+</section>
+
+<!-- ===== HEARTBEAT ===== -->
+<section id="heartbeat-sec">
+  <div class="reveal">
+    <div class="hb-big" onclick="addHeart()">♥</div>
+    <div class="hb-msg">Every beat of this heart<br>has your name on it, Suvu.</div>
+    <div class="hb-sub">Tap the heart to send Gawar a heartbeat 💓</div>
+    <div id="hb-count"></div>
+  </div>
+</section>
+
+<!-- ===== PROMISES ===== -->
+<section id="promises">
+  <div class="center reveal">
+    <span class="sec-tag">written in stars</span>
+    <h2 class="sec-h">My promises to you</h2>
+  </div>
+  <div class="promise-grid">
+    <div class="promise-card reveal"><div class="promise-num">1</div><div class="promise-title">I will always choose you</div><div class="promise-body">Every single day. Without hesitation. You are always the choice.</div></div>
+    <div class="promise-card reveal"><div class="promise-num">2</div><div class="promise-title">I will kiss your forehead</div><div class="promise-body">As many times as you let me. That is a promise and a plan.</div></div>
+    <div class="promise-card reveal"><div class="promise-num">3</div><div class="promise-title">I will never let you feel alone</div><div class="promise-body">Not on your worst days. Not on your quietest nights. I am here.</div></div>
+    <div class="promise-card reveal"><div class="promise-num">4</div><div class="promise-title">I will make you laugh</div><div class="promise-body">Even on the hard days. Especially on the hard days. That real laugh — I will chase it.</div></div>
+    <div class="promise-card reveal"><div class="promise-num">5</div><div class="promise-title">I will love you more tomorrow</div><div class="promise-body">Than I do today. And today I love you more than I can say.</div></div>
+    <div class="promise-card reveal"><div class="promise-num">6</div><div class="promise-title">I will let you sleep 😴</div><div class="promise-body">Always. Sleep as much as you want, jaan. I will be right there when you wake up.</div></div>
+  </div>
+</section>
+
+<!-- ===== LOVE LETTER ===== -->
+<section id="letter">
+  <div class="center reveal">
+    <span class="sec-tag">from my heart</span>
+    <h2 class="sec-h">A letter, just for Suvu</h2>
+  </div>
+  <div class="letter-wrap reveal">
+    <div class="l-date">10 months — and every month is my favourite</div>
+    <div class="l-greet">My Suvu,</div>
+    <p class="l-body">
+      Before you, I was just passing through days.<br>Not living. Just existing. Quietly. Without direction.<br><br>
+      And then <span class="hl">you happened.</span><br><br>
+      You walked into every corner of my life — the dark ones, the messy ones, the ones I was ashamed of — and you stayed anyway.<br><br>
+      I know you forget things in two minutes. I know you can fall asleep in thirty seconds. I know your texts drive me absolutely insane in the best way possible.<br><br>
+      But what I also know is this —<br><br>
+      <span class="hl">That forehead kiss at college.</span> That hug at the market. The way you look when you laugh the real laugh. The photos you send. Every single one of those moments is tattooed on my heart permanently.<br><br>
+      My family is my world. They are my roots, my foundation, my home.<br><br>
+      And then there is you — <span class="hl">right beside them. The home I chose. All on my own. With my whole heart.</span><br><br>
+      If you ever wonder how much you mean to me, Suvu — look at how I look at you. That look has no translation. It just means you. All of you. Always.<br><br>
+      Ten months. And I am more sure today than I was on day one.<br><br>
+      <span class="hl">You are my person.</span>
+    </p>
+    <div class="l-sign">Forever, Gawar 🌹</div>
+  </div>
+</section>
+
+<!-- ===== FINALE ===== -->
+<section id="finale">
+  <div class="finale-ghost">SUVU</div>
+  <div class="finale-months reveal">10</div>
+  <div class="finale-m-label reveal">months of us</div>
+  <div class="finale-big reveal">
+    You are not just beautiful, Suvu.<br>
+    You are the kind of beautiful<br>
+    <em>that stays inside a person</em><br>
+    long after they close their eyes.
+  </div>
+  <div class="hb-big" style="margin-top:40px;font-size:clamp(48px,12vw,80px);">♥</div>
+  <div class="finale-from reveal">with every heartbeat — Gawar 🌹</div>
+  <button class="game-btn reveal" style="margin-top:32px;" onclick="launchConfetti()">🎊 Celebrate us!</button>
+</section>
+
+<script>
+/* ===== GALAXY ===== */
+(function(){
+  const c=document.getElementById('galaxy'),ctx=c.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
+  function mkStars(){stars=[];for(let i=0;i<220;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.2,a:Math.random(),s:Math.random()*.4+.1});}
+  let mx=W/2,my=H/2;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{
+      s.a+=s.s*.01;if(s.a>1)s.a=0;
+      const dx=(mx-W/2)*.004*s.r,dy=(my-H/2)*.004*s.r;
+      ctx.beginPath();ctx.arc(s.x+dx,s.y+dy,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,${180+Math.random()*40},${200+Math.random()*40},${.3+s.a*.5})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  resize();mkStars();draw();
+  window.addEventListener('resize',()=>{resize();mkStars();});
+})();
+
+/* ===== PETALS ===== */
+(function(){
+  const c=document.getElementById('petal-container');
+  ['🌹','❤️','🥀','✨','💕','🌸'].forEach((e,i)=>{
+    for(let j=0;j<3;j++){
+      const p=document.createElement('div');p.className='petal';
+      p.textContent=e;
+      p.style.cssText=`left:${Math.random()*100}vw;top:-20px;font-size:${10+Math.random()*10}px;animation-duration:${10+Math.random()*14}s;animation-delay:${Math.random()*14}s;`;
+      c.appendChild(p);
+    }
+  });
+})();
+
+/* ===== DAYS COUNTER ===== */
+(function(){
+  const start=new Date('2024-08-09');
+  const diff=Math.floor((new Date()-start)/(1000*60*60*24));
+  document.getElementById('cnt-days').textContent=diff>0?diff:'300';
+})();
+
+/* ===== SCROLL REVEAL ===== */
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ===== TYPING LETTER ===== */
+(function(){
+  const chunks=[
+    'I do not know how to say this simply.\n\n',
+    'There is no word big enough, no poem deep enough,\nno gesture grand enough to hold everything I feel for you.\n\n',
+    'I notice the way you sleep — deeply, peacefully, like the world owes you rest.\nI notice how you forget things in two minutes but never forget to make me feel loved.\n\n',
+    'I notice the way your laugh escapes before you can stop it.\nThat laugh is my ',
+    'favourite sound on this earth.\n\n',
+    'That forehead kiss at college.\nThat hug at the market.\nThose photos you send that stop my heart.\n\n',
+    'Every single one of those moments lives in me permanently.\n\n',
+    'You are not just part of my life, Suvu.\nYou are the part that makes the rest of it ',
+    'make sense.\n\n',
+    'Ten months. And I am more sure today than I was on day one.\nYou are my person. Always.'
+  ];
+  const el=document.getElementById('typed-text');
+  const sign=document.getElementById('tp-sign');
+  let ci=0,ci2=0,text='',typing=false;
+
+  function typeNext(){
+    if(ci>=chunks.length){sign.style.opacity='1';return;}
+    const chunk=chunks[ci];
+    if(ci2<chunk.length){
+      text+=chunk[ci2];
+      ci2++;
+      el.innerHTML=text.replace(/\n/g,'<br>')+'<span class="cursor"></span>';
+      setTimeout(typeNext,ci2===1?0:28);
+    } else {ci++;ci2=0;setTimeout(typeNext,180);}
+  }
+
+  const secObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting&&!typing){typing=true;setTimeout(typeNext,600);}});
+  },{threshold:.3});
+  secObs.observe(document.getElementById('typing-sec'));
+})();
+
+/* ===== PHOTO GALLERY ===== */
+(function(){
+  const captions=[
+    'Just her being her 🌹','My whole world 💕','The smile that stops time','Her eyes ✨',
+    'Prettiest person alive 🌸','That glow 💫','I took this and kept staring','My Suvu 🥀',
+    'She has no idea how beautiful she is','Caught her laughing 😂','Pure magic','That look 👁️',
+    'My favourite face on earth','She is everything 🌹','The most beautiful girl I know 💋',
+    'Suvu being Suvu 🌸'
+  ];
+  const heights=['200px','160px','240px','180px','220px','190px','250px','170px',
+                 '210px','180px','230px','160px','200px','240px','190px','220px'];
+  const grid=document.getElementById('photo-masonry');
+  captions.forEach((cap,i)=>{
+    const div=document.createElement('div');
+    div.className='photo-item';
+    div.style.height=heights[i];
+    div.innerHTML=`<div class="photo-placeholder" style="height:100%;" onclick="openLB(${i})"><span>📸</span><p>Photo ${i+1}</p><p style="font-size:8px;opacity:.6;">${cap}</p></div><div class="photo-caption">${cap}</div>`;
+    grid.appendChild(div);
+  });
+})();
+
+function openLB(i){
+  document.getElementById('lightbox').classList.add('open');
+  document.getElementById('lb-img').src='';
+  document.getElementById('lb-caption').textContent='Replace this placeholder with Suvu\'s photo 🌹';
+}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+
+/* ===== PETAL GAME ===== */
+const petalMsgs=[
+  'You are my favourite person to exist on this planet. 🌹',
+  '10 months and I still get butterflies when you text. 💕',
+  'That forehead kiss at college — I replay it every day. 💋',
+  'The way you sleep is criminally adorable. 😴',
+  'Your laugh is my happy place. I chase it every day. 😂',
+  'That hug at the market? I still feel it. 🤗',
+  'You drive me crazy with one text. One. Text. 📱',
+  'My family is my world — and you are right beside them. 🤍',
+  'I would choose you ten thousand times over. ✨',
+  'You are the home I built with my whole heart. 🏡',
+  'Those photos you send stop my heart every single time. 💋',
+  'I love you more than I know how to say. 🌹',
+  'Even your short memory is perfect to me. 🧠',
+  'Gawar is the luckiest person alive. Fact. 🌟',
+  'You are not just beautiful. You are dangerous beautiful. 🥀'
+];
+let pi=0,ps=[...petalMsgs].sort(()=>Math.random()-.5);
+function pickPetal(){
+  const f=document.getElementById('flower');
+  f.style.transform='scale(.8) rotate(-20deg)';
+  setTimeout(()=>f.style.transform='',250);
+  document.getElementById('petal-msg').textContent=ps[pi%ps.length];
+  pi++;document.getElementById('petal-ct').textContent=`Petal ${pi} of ${ps.length}`;
+  if(pi>=ps.length)document.getElementById('petal-ct').textContent='All petals picked — you have all my love 🌹';
+}
+function resetPetals(){pi=0;ps=[...petalMsgs].sort(()=>Math.random()-.5);document.getElementById('petal-msg').textContent='Tap the flower above ↑';document.getElementById('petal-ct').textContent='';}
+
+/* ===== LOVE CARDS ===== */
+(function(){
+  const cards=[
+    {icon:'👁️',title:'Her eyes',desc:'They feel everything. Looking into them is like coming home after being lost for years.'},
+    {icon:'😊',title:'Her smile',desc:'Stops time. Every single time. My favourite sight in the entire world.'},
+    {icon:'😂',title:'Her laugh',desc:'The real one. The one that escapes. My favourite sound on this earth.'},
+    {icon:'😴',title:'Her sleep',desc:'She sleeps so deeply and peacefully. She looks like an angel every single time.'},
+    {icon:'📱',title:'Her texts',desc:'One text from her can flip my entire day. She has no idea what she does.'},
+    {icon:'💋',title:'Her photos',desc:'When she sends those kissing photos — Gawar ceases to function. Every time.'},
+    {icon:'🤗',title:'Her hugs',desc:'That market hug lives in my memory permanently. Her warmth is unlike anything.'},
+    {icon:'🧠',title:'Her forgetfulness',desc:'She forgets everything but she never forgets to make me feel loved.'},
+    {icon:'🤍',title:'Her heart',desc:'She loves people like they are precious. That gentleness is the rarest thing.'},
+    {icon:'✨',title:'Her aura',desc:'She walks into a space and something shifts. She does not even try. She just is.'},
+    {icon:'🌙',title:'Her at night',desc:'Soft, warm, real. Being near her at night is the safest place in the world.'},
+    {icon:'🌹',title:'All of her',desc:'Every single thing. The whole package. I would not trade one bit of it for anything.'},
+  ];
+  const scr=document.getElementById('loves-scroll');
+  cards.forEach(c=>{
+    const d=document.createElement('div');d.className='love-card';
+    d.innerHTML=`<div class="lc-icon">${c.icon}</div><div class="lc-title">${c.title}</div><p class="lc-desc">${c.desc}</p>`;
+    scr.appendChild(d);
+  });
+})();
+
+/* ===== QUIZ ===== */
+const questions=[
+  {q:'Where did Gawar kiss Suvu on her forehead?',opts:['At home','At college','At the market','On a call'],a:1,fb:'Yes! At college 💋 That moment is tattooed on Gawar\'s heart.'},
+  {q:'Where did they share that special hug?',opts:['At college','At home','At the market','In the car'],a:2,fb:'The market hug 🤗 Gawar still replays it every day.'},
+  {q:'What does Suvu love to do (a LOT)?',opts:['Cook','Sleep 😴','Sing','Read'],a:1,fb:'Sleep queen! 😴 And she looks adorable every single time.'},
+  {q:'What drives Gawar absolutely crazy?',opts:['Her cooking','Her voice notes','Her texts & photos 📱','Her playlists'],a:2,fb:'Those texts and photos? Gawar\'s heart literally stops. 💋'},
+  {q:'What is Suvu\'s superpower?',opts:['Cooking fast','Perfect memory','Making Gawar smile','Sleeping anywhere 😴'],a:3,fb:'She can sleep ANYWHERE. It is a gift honestly. 😂'},
+  {q:'How many months have they been together?',opts:['6 months','8 months','10 months 🌹','12 months'],a:2,fb:'10 beautiful months! And counting forever. 🌹'},
+  {q:'Where does Suvu sit in Gawar\'s world?',opts:['Second place','Just a friend','Right beside his family 🤍','Top secret'],a:2,fb:'Right beside his family. The highest place. The chosen home. 🤍'},
+  {q:'What is Gawar\'s favourite sound?',opts:['Music','Rain','Suvu\'s real laugh 😂','Silence'],a:2,fb:'That real laugh that escapes before she can stop it. It is everything. 😂'},
+];
+let qi=0,score=0,answered=false;
+function renderQ(){
+  const box=document.getElementById('quiz-box');
+  if(qi>=questions.length){
+    const pct=Math.round(score/questions.length*100);
+    box.innerHTML=`<div class="q-score">${score}/${questions.length} — ${pct}%</div>
+    <p class="q-score-msg">${pct===100?'Perfect score! You know us better than anyone 🌹 Gawar loves you so much.':pct>=75?'So close to perfect 💕 You know us deeply and Gawar loves every bit of it.':pct>=50?'Pretty good! But keep reading this page — there is more love to discover 🌸':'Read the whole page again, jaan — Gawar put his whole heart in it 🥀'}</p>
+    <button class="game-btn" onclick="qi=0;score=0;renderQ();" style="margin-top:20px;">🔄 Try again</button>`;
+    return;
+  }
+  const q=questions[qi];
+  box.innerHTML=`<div class="q-num">Question ${qi+1} of ${questions.length}</div>
+  <div class="q-text">${q.q}</div>
+  <div class="q-options">${q.opts.map((o,i)=>`<button class="q-opt" onclick="answerQ(${i})">${o}</button>`).join('')}</div>
+  <div class="q-feedback" id="qfb"></div>`;
+  answered=false;
+}
+function answerQ(i){
+  if(answered)return;answered=true;
+  const q=questions[qi];
+  const btns=document.querySelectorAll('.q-opt');
+  btns[i].classList.add(i===q.a?'correct':'wrong');
+  btns[q.a].classList.add('correct');
+  btns.forEach(b=>b.disabled=true);
+  if(i===q.a)score++;
+  document.getElementById('qfb').textContent=q.fb;
+  setTimeout(()=>{qi++;renderQ();},1800);
+}
+renderQ();
+
+/* ===== MEMORY MATCH ===== */
+const mgPairs=[
+  {e:'🌹',msg:'Perfect match — just like us 🌹'},
+  {e:'💋',msg:'That kiss on the forehead — forever in Gawar\'s heart 💋'},
+  {e:'😴',msg:'My sleepy queen — adorable always 😴'},
+  {e:'🤗',msg:'That market hug — I still feel it 🤗'},
+  {e:'❤️',msg:'My whole heart belongs to you ❤️'},
+  {e:'✨',msg:'You light up everything you walk into ✨'},
+  {e:'📱',msg:'One text from you. That is all it takes. 📱'},
+  {e:'🌸',msg:'You are the most beautiful thing in my world 🌸'},
+];
+let mgFlipped=[],mgMatched=0,mgLocked=false;
+function initMG(){
+  mgFlipped=[];mgMatched=0;mgLocked=false;
+  document.getElementById('mg-msg').textContent='';
+  document.getElementById('mg-win').textContent='';
+  const grid=document.getElementById('mg-grid');grid.innerHTML='';
+  const deck=[...mgPairs,...mgPairs].sort(()=>Math.random()-.5);
+  deck.forEach((card,i)=>{
+    const d=document.createElement('div');d.className='mc';d.dataset.e=card.e;d.dataset.msg=card.msg;
+    d.innerHTML=`<div class="mc-inner"><div class="mc-f">🌸</div><div class="mc-b">${card.e}</div></div>`;
+    d.onclick=()=>mgFlip(d);
+    grid.appendChild(d);
+  });
+}
+function mgFlip(card){
+  if(mgLocked||card.classList.contains('flip')||card.classList.contains('done'))return;
+  card.classList.add('flip');mgFlipped.push(card);
+  if(mgFlipped.length===2){
+    mgLocked=true;
+    const[a,b]=mgFlipped;
+    if(a.dataset.e===b.dataset.e){
+      a.classList.add('done');b.classList.add('done');
+      mgMatched++;document.getElementById('mg-msg').textContent=a.dataset.msg;
+      mgFlipped=[];mgLocked=false;
+      if(mgMatched===mgPairs.length)document.getElementById('mg-win').textContent='You matched everything 🌹 Just like Gawar and Suvu — a perfect pair. Forever.';
+    } else setTimeout(()=>{a.classList.remove('flip');b.classList.remove('flip');mgFlipped=[];mgLocked=false;},850);
+  }
+}
+initMG();
+
+/* ===== HEARTBEAT ===== */
+let hbCount=0;
+function addHeart(){
+  hbCount++;
+  document.getElementById('hb-count').textContent=`${hbCount.toLocaleString()} heartbeats sent to Suvu 💓`;
+  const h=document.createElement('div');
+  h.textContent='💕';h.style.cssText=`position:fixed;left:${20+Math.random()*60}vw;top:60vh;font-size:${16+Math.random()*20}px;pointer-events:none;z-index:50;animation:petalfall 1.5s ease forwards;`;
+  document.body.appendChild(h);setTimeout(()=>h.remove(),1600);
+}
+
+/* ===== CONFETTI ===== */
+function launchConfetti(){
+  const emojis=['🌹','💕','✨','❤️','🌸','💋','🥀'];
+  for(let i=0;i<60;i++){
+    const c=document.createElement('div');c.className='conf';
+    c.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    c.style.cssText=`left:${Math.random()*100}vw;top:-20px;font-size:${12+Math.random()*18}px;animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*1.5}s;position:fixed;pointer-events:none;z-index:999;`;
+    document.body.appendChild(c);setTimeout(()=>c.remove(),5000);
+  }
+}
+</script>
+</body>
+</html>
